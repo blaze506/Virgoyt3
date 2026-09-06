@@ -99,7 +99,15 @@ button {
 .hero-content {
   max-width: 850px;
 }
-
+.profile-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  margin: 0 auto 25px;
+  display: block;
+}
 .badge {
   display: inline-block;
 
