@@ -1,1 +1,179 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #080808;
+  color: #ffffff;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+/* NAVBAR */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 7%;
+
+  background: rgba(8, 8, 8, 0.92);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid #222;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar nav a {
+  color: #cfcfcf;
+  font-size: 0.95rem;
+  transition: 0.3s;
+}
+
+.navbar nav a:hover {
+  color: #ffffff;
+}
+
+.join-btn {
+  padding: 11px 18px;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 700;
+}
+
+/* HERO */
+
+.hero {
+  min-height: 82vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 80px 7%;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #252525 0%,
+      #0d0d0d 40%,
+      #080808 75%
+    );
+}
+
+.hero-content {
+  max-width: 850px;
+}
+
+.badge {
+  display: inline-block;
+
+  margin-bottom: 20px;
+
+  padding: 7px 14px;
+
+  border: 1px solid #333;
+  border-radius: 50px;
+
+  background: #151515;
+
+  color: #ffffff;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  margin-bottom: 25px;
+}
+
+.hero h1 span {
+  display: block;
+  background: linear-gradient(90deg, #ffffff, #777777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  max-width: 650px;
+  margin: 0 auto 35px;
+
+  color: #bdbdbd;
+  font-size: 1.05rem;
+}
+
+/* BUTTONS */
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 12px 22px;
+
+  border-radius: 9px;
+
+  font-weight: 700;
+
+  transition: 0.3s;
+}
+
+.primary-btn {
+  background: #ffffff;
+  color: #000000;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.88;
+}
+
+.secondary-btn {
+ 
