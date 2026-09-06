@@ -1,0 +1,11 @@
+{
+  "name": "Virgoyt Community",
+  "short_name": "Virgoyt",
+  "description": "The official Virgoyt Community website.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "orientation": "portrait-primary",
+  "icons": []
+}
