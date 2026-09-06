@@ -2,9 +2,27 @@
 // VIRGOYT COMMUNITY JAVASCRIPT
 // ================================
 
-// Get saved members and posts
-let members = JSON.parse(localStorage.getItem("virgoytMembers")) || [];
-let posts = JSON.parse(localStorage.getItem("virgoytPosts")) || [];
+// ================================
+// SUPABASE CONNECTION
+// ================================
+
+const SUPABASE_URL = "https://odjlkbhujmxlgqmexcqp.supabase.co";
+
+// Replace this with your Supabase PUBLISHABLE KEY
+const SUPABASE_KEY = "sb_publishable_G4kDzdFO8QfrOKgIPiyxQA__gz0AOzm";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+
+// ================================
+// LOCAL COMMUNITY MEMBERS
+// ================================
+
+let members =
+  JSON.parse(localStorage.getItem("virgoytMembers")) || [];
 
 
 // ================================
@@ -71,7 +89,8 @@ function joinCommunity() {
 // CREATE COMMUNITY POST
 // ================================
 
-function createPost() {
+async function createPost() {
+
   const input = document.getElementById("postInput");
 
   if (!input) return;
@@ -90,41 +109,101 @@ function createPost() {
     : "Community Member";
 
 
-  const post = {
-    id: Date.now(),
-    name: savedName,
-    text: text,
-    time: new Date().toLocaleString()
-  };
-
-
-  posts.unshift(post);
-
-  localStorage.setItem(
-    "virgoytPosts",
-    JSON.stringify(posts)
+  // Show temporary status
+  const button = document.querySelector(
+    '[onclick="createPost()"]'
   );
+
+  if (button) {
+    button.disabled = true;
+    button.textContent = "Posting...";
+  }
+
+
+  // Save post to Supabase
+  const { data, error } = await supabaseClient
+    .from("post")
+    .insert([
+      {
+        name: savedName,
+        text: text
+      }
+    ])
+    .select();
+
+
+  if (error) {
+
+    console.error("Supabase error:", error);
+
+    alert(
+      "Your post could not be published. Please check your connection and Supabase settings."
+    );
+
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Post";
+    }
+
+    return;
+  }
 
 
   input.value = "";
 
-  displayPosts();
+  if (button) {
+    button.disabled = false;
+    button.textContent = "Post";
+  }
+
+
+  // Reload posts
+  await displayPosts();
 }
 
 
 // ================================
-// DISPLAY POSTS
+// DISPLAY POSTS FROM SUPABASE
 // ================================
 
-function displayPosts() {
+async function displayPosts() {
+
   const container = document.getElementById("posts");
 
   if (!container) return;
 
-  container.innerHTML = "";
+
+  container.innerHTML = `
+    <div class="post">
+      <p class="post-text">Loading community posts... 🔥</p>
+    </div>
+  `;
 
 
-  if (posts.length === 0) {
+  const { data, error } = await supabaseClient
+    .from("post")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+
+  if (error) {
+
+    console.error("Could not load posts:", error);
+
+    container.innerHTML = `
+      <div class="post">
+        <p class="post-text">
+          Unable to load posts right now.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
     container.innerHTML = `
       <div class="post">
         <p class="post-text">
@@ -137,28 +216,40 @@ function displayPosts() {
   }
 
 
-  posts.forEach(post => {
+  data.forEach(post => {
 
     const article = document.createElement("article");
 
     article.className = "post";
 
 
+    const postName =
+      post.name || "Community Member";
+
+    const postText =
+      post.text || "";
+
+    const postTime =
+      post.created_at
+        ? new Date(post.created_at).toLocaleString()
+        : "";
+
+
     article.innerHTML = `
       <div class="post-header">
 
         <span class="post-name">
-          ${escapeHTML(post.name)}
+          ${escapeHTML(postName)}
         </span>
 
         <span class="post-time">
-          ${escapeHTML(post.time)}
+          ${escapeHTML(postTime)}
         </span>
 
       </div>
 
       <p class="post-text">
-        ${escapeHTML(post.text)}
+        ${escapeHTML(postText)}
       </p>
     `;
 
@@ -173,6 +264,7 @@ function displayPosts() {
 // ================================
 
 function escapeHTML(text) {
+
   const div = document.createElement("div");
 
   div.textContent = text;
@@ -214,5 +306,7 @@ document.addEventListener("keydown", function(event) {
 // ================================
 
 document.addEventListener("DOMContentLoaded", function() {
+
   displayPosts();
+
 });
