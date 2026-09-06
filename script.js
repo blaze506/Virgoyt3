@@ -1,3 +1,4 @@
+console.log("VIRGOYT SCRIPT IS WORKING");
 // ================================
 // VIRGOYT COMMUNITY JAVASCRIPT
 // ================================
