@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta name="theme-color" content="#111111">
+  <meta name="description" content="Virgoyt Community — connect, share and stay updated.">
+
+  <title>Virgoyt Community</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">VIRGOYT</div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#community">Community</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button class="join-btn" onclick="openJoinModal()">
+      Join Community
+    </button>
+  </header>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section id="home" class="hero">
+
+      <div class="hero-content">
+
+        <span class="badge">🔥 VIRGOYT COMMUNITY</span>
+
+        <h1>
+          Welcome to the
+          <span>Virgoyt Community</span>
+        </h1>
+
+        <p>
+          Connect with other fans, share your favorite moments,
+          discover updates and be part of the community.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="primary-btn" onclick="openJoinModal()">
+            Join the Community
+          </button>
+
+          <a href="#community" class="secondary-btn">
+            Explore
+          </a>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SOCIAL LINKS -->
+    <section class="social-section">
+
+      <h2>Follow Virgoyt</h2>
+
+      <p>Stay connected and never miss an update.</p>
+
+      <div class="social-links">
+
+        <a
+          href="https://vt.tiktok.com/ZSq21STkQ/"
+          target="_blank"
+          rel="noopener"
+        >
+          TikTok 1
+        </a>
+
+        <a
+          href="https://vt.tiktok.com/ZSq21meHa/"
+          target="_blank"
+          rel="noopener"
+        >
+          TikTok 2
+        </a>
+
+        <a
+          href="https://vt.tiktok.com/ZSq21caCR/"
+          target="_blank"
+          rel="noopener"
+        >
+          TikTok 3
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- COMMUNITY -->
+    <section id="community" class="community">
+
+      <div class="section-heading">
+
+        <span class="badge">COMMUNITY</span>
+
+        <h2>Be Part of Something Bigger</h2>
+
+        <p>
+          A place for fans to connect, discuss and share.
+        </p>
+
+      </div>
+
+
+      <div class="feature-grid">
+
+        <article class="feature-card">
+          <div class="feature-icon">💬</div>
+
+          <h3>Connect</h3>
+
+          <p>
+            Meet other members and join conversations
+            about Virgoyt.
+          </p>
+        </article>
+
+
+        <article class="feature-card">
+          <div class="feature-icon">📸</div>
+
+          <h3>Share</h3>
+
+          <p>
+            Share your favorite memories, posts and
+            community moments.
+          </p>
+        </article>
+
+
+        <article class="feature-card">
+          <div class="feature-icon">🔥</div>
+
+          <h3>Stay Updated</h3>
+
+          <p>
+            Keep up with the latest community news
+            and updates.
+          </p>
+        </article>
+
+      </div>
+
+
+      <!-- COMMUNITY POST BOX -->
+      <div class="post-box">
+
+        <h3>Community Wall</h3>
+
+        <p>
+          Share something with the community.
+        </p>
+
+        <textarea
+          id="postInput"
+          placeholder="Write something..."
+          maxlength="500"
+        ></textarea>
+
+        <button class="primary-btn" onclick="createPost()">
+          Post
+        </button>
+
+      </div>
+
+
+      <div id="posts" class="posts"></div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+
+      <span class="badge">ABOUT</span>
+
+      <h2>Welcome to Virgoyt Community</h2>
+
+      <p>
+        This community website is designed to give fans
+        a simple place to connect, interact and stay
+        updated.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- JOIN MODAL -->
+  <div id="joinModal" class="modal">
+
+    <div class="modal-content">
+
+      <button class="close-btn" onclick="closeJoinModal()">
+        ×
+      </button>
+
+      <h2>Join the Community</h2>
+
+      <p>
+        Enter your name to join the community.
+      </p>
+
+      <input
+        type="text"
+        id="memberName"
+        placeholder="Your name"
+        maxlength="40"
+      >
+
+      <button class="primary-btn full-btn" onclick="joinCommunity()">
+        Join
+      </button>
+
+      <p id="joinMessage" class="message"></p>
+
+    </div>
+
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="logo">VIRGOYT</div>
+
+    <p>
+      © 2026 Virgoyt Community. All rights reserved.
+    </p>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js")
+          .then(() => console.log("Service Worker registered"))
+          .catch(error => console.log("Service Worker error:", error));
+      });
+    }
+  </script>
+
+</body>
+</html>
